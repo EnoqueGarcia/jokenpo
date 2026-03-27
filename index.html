@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jokenpô Dev - Placar & Embaralhar</title>
+    <link rel="stylesheet" href="style.css">
+   
+</head>
+<body>
+<!-- teste -->
+    <div class="container">
+        <h1>Jokenpô</h1>
+
+        <div class="placar">
+            <div class="pontos">VOCÊ <span id="ponto-usuario">0</span></div>
+            <div class="pontos">COMPUTADOR <span id="ponto-pc">0</span></div>
+        </div>
+
+        <section class="computador">
+            <h2>Computador</h2>
+            <div class="painel-opcoes" id="container-pc">
+                <div class="opcao" id="pc-pedra">
+                    <img src="./src/pedra.png" alt="Pedra">
+                </div>
+                <div class="opcao" id="pc-papel">
+                    <img src="./src/papel.png" alt="Papel">
+                </div>
+                <div class="opcao" id="pc-tesoura">
+                    <img src="./src/tesoura.png" alt="Tesoura">
+                </div>
+            </div>
+        </section>
+
+        <div id="resultado" class="resultado-texto">Clique em uma opção abaixo!</div>
+
+        <section class="usuario">
+            <h2>Sua Vez</h2>
+            <div class="painel-opcoes" id="container-usuario">
+                <div class="opcao" id="btn-pedra" data-name="Pedra" onclick="jogar('pedra')">
+                    <img src="./src/pedra.png" alt="Pedra">
+                </div>
+                <div class="opcao" id="btn-papel" data-name="Papel" onclick="jogar('papel')">
+                    <img src="./src/papel.png" alt="Papel">
+                </div>
+                <div class="opcao" id="btn-tesoura" data-name="Tesoura" onclick="jogar('tesoura')">
+                    <img src="./src/tesoura.png" alt="Tesoura">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+       // Variáveis de pontuação global
+let pontosUser = 0;
+let pontosPC = 0;
+
+/**
+ * Função para embaralhar as posições das opções
+ */
+function embaralhar() {
+    const ids = ['pedra', 'papel', 'tesoura'];
+    
+    ids.forEach(id => {
+        const ordemAleatoriaPC = Math.floor(Math.random() * 100);
+        const ordemAleatoriaUser = Math.floor(Math.random() * 100);
+        
+        document.getElementById(`pc-${id}`).style.order = ordemAleatoriaPC;
+        document.getElementById(`btn-${id}`).style.order = ordemAleatoriaUser;
+    });
+}
+
+/**
+ * Função principal
+ */
+function jogar(escolhaUsuario) {
+    const opcoes = ['pedra', 'papel', 'tesoura'];
+    const escolhaPC = opcoes[Math.floor(Math.random() * 3)];
+
+    // 1. Limpa destaques anteriores
+    document.querySelectorAll('.computador .opcao').forEach(div => {
+        div.classList.remove('selecionado');
+    });
+    
+    // 2. Destaca a escolha do computador
+    document.getElementById(`pc-${escolhaPC}`).classList.add('selecionado');
+
+    const resultadoDiv = document.getElementById('resultado');
+   
+
+    // 3. Lógica de Resultado
+    if (escolhaUsuario === escolhaPC) {
+        resultadoDiv.innerText = `Empatou! 🤝 O computador também escolheu ${escolhaPC}.`;
+        resultadoDiv.style.color = "#8d8d99";
+    } else if (
+        (escolhaUsuario === 'pedra' && escolhaPC === 'tesoura') ||
+        (escolhaUsuario === 'papel' && escolhaPC === 'pedra') ||
+        (escolhaUsuario === 'tesoura' && escolhaPC === 'papel')
+    ) {
+        resultadoDiv.innerText = `Você Venceu! 🎉 O computador escolheu ${escolhaPC}.`;
+        resultadoDiv.style.color = "#00b37e";
+        pontosUser++;
+        document.getElementById('ponto-usuario').innerText = pontosUser;
+    } else {
+        resultadoDiv.innerText = `Você Perdeu! 🤖 O computador escolheu ${escolhaPC}.`;
+        resultadoDiv.style.color = "#f75a68";
+        pontosPC++;
+        document.getElementById('ponto-pc').innerText = pontosPC;
+    }
+
+    // 4. NOVA FUNCIONALIDADE: Delay para a próxima rodada
+
+    document.getElementById('container-usuario').style.pointerEvents = 'none';
+
+    setTimeout(() => {
+        // Limpa o destaque visual do computador
+        document.getElementById(`pc-${escolhaPC}`).classList.remove('selecionado');
+        
+        // Avisa que pode jogar de novo
+        resultadoDiv.innerText = "Sua vez! Escolha uma opção...";
+        resultadoDiv.style.color = "#e1e1e6";
+
+        // Embaralha as posições
+        embaralhar();
+
+        // Reativa os cliques do usuário
+        document.getElementById('container-usuario').style.pointerEvents = 'all';
+    }, 2700); // tempo de espera
+}
+
+// Inicializa o jogo
+embaralhar();
+    </script>
+</body>
+</html>

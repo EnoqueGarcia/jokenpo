@@ -1,0 +1,208 @@
+ @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+        body {
+            background-image: url('./src/5e542b24-3e1c-49d5-aef7-bffe33c888cf.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: right;
+            background-attachment: fixed;
+            color: #e1e1e6;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            user-select: none;
+
+        }
+
+#resultado {
+    color: #ffd84d;
+            -webkit-text-stroke: 0.5px #5a2e0c;
+}
+      
+
+        h1 {
+            margin-bottom: 30px;
+            color: #ffd84d;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            -webkit-text-stroke: 1px #5a2e0c;
+            font-weight: bold;
+            font-size: 3em;
+        }
+
+        h2 {
+            color: #2abd36;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px 0 10px 0;
+        }
+
+  
+        .container {
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+                background-color: #dfdfdf00;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 150px;
+        }
+
+        .placar {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            background-color: #43439609;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #323238;
+            
+        }
+
+        .pontos {
+           /* font-family: 'Orbitron', sans-serif; /* Fonte de relógio */ 
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #998d8d;
+            
+
+        }
+
+        .pontos span {
+                 color: #2abd36;
+            font-size: 2rem;
+            display: block;
+            margin-top: 5px;
+        }
+
+       
+        .painel-opcoes {
+            display: flex;
+            flex-direction: row; 
+            align-items: center;
+            gap: 10px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+
+        .opcao {
+            /* Dimensões e Espaçamento */
+            width: 200px;
+            height: 100px;
+            
+            /* Cores e Bordas */
+            background-color: #1111bd00;
+            border: 2px solid #1010eb00;
+            border-radius: 8px;
+            
+            /* Alinhamento Interno (para a imagem) */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            /* Interação */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            
+            /* Importante para o embaralhar */
+            order: 0;
+            position: relative;
+        }
+
+        /* Estilização das imagens dentro das opções */
+        .opcao img {
+            max-width: 80px;
+            max-height: 80px;
+            object-fit: contain; /* Garante que a imagem não distorça */
+        }
+
+        .resultado-texto {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 30px 0;
+            padding: 20px 0;
+            border-top: 1px solid #323238;
+            border-bottom: 1px solid #323238;
+            color: #00b37e; /* Cor padrão para vitória */
+            min-height: 1.6em; /* Mantém o espaço mesmo vazio */
+        }
+
+
+
+        /* Efeito apenas nas opções que o usuário clica */
+        .usuario .opcao:hover {
+           margin-top: 30px;
+            transform:  scale(1.4);
+        }
+
+        /* Label com o nome da opção no hover */
+        .usuario .opcao::after {
+            content: attr(data-name);
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #00b37e;
+            color: #121214;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .usuario .opcao:hover::after {
+            opacity: 1;
+        }
+
+        /* Quando o computador "escolhe" o item */
+        .computador .selecionado {
+            
+            background-color: #fc003273;
+            
+        }
+
+        /* Media Query para Desktop */
+        @media (min-width: 769px) {
+            body {
+                overflow: hidden;
+            }
+        }
+
+        /* Media Query para Mobile */
+        @media (max-width: 768px) {
+            body {
+                background-position: center;
+                background-size: cover;
+            }
+
+            .usuario .opcao::after {
+                bottom: auto;
+                top: -30px;
+            }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+                background-color: #dfdfdf00;
+                padding: 20px;
+                border-radius: 10px;
+              
+        }
+
+        }
