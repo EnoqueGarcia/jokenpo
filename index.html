@@ -97,12 +97,12 @@ function jogar(escolhaUsuario) {
         (escolhaUsuario === 'papel' && escolhaPC === 'pedra') ||
         (escolhaUsuario === 'tesoura' && escolhaPC === 'papel')
     ) {
-        resultadoDiv.innerText = `Você Venceu! 🎉 O computador escolheu ${escolhaPC}.`;
+        resultadoDiv.innerText = `Você Venceu!  O computador escolheu ${escolhaPC}.`;
         resultadoDiv.style.color = "#00b37e";
         pontosUser++;
         document.getElementById('ponto-usuario').innerText = pontosUser;
     } else {
-        resultadoDiv.innerText = `Você Perdeu! 🤖 O computador escolheu ${escolhaPC}.`;
+        resultadoDiv.innerText = `Você Perdeu!  O computador escolheu ${escolhaPC}.`;
         resultadoDiv.style.color = "#f75a68";
         pontosPC++;
         document.getElementById('ponto-pc').innerText = pontosPC;
